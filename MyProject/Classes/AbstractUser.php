@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace MyProject\Classes;
 
 /**
- * Abstract Class AbstractUser
- * Base class for all user types
+ * Абстрактный класс AbstractUser
+ * Базовый класс для всех типов пользователей
  * 
  * @package MyProject\Classes
  */
 abstract class AbstractUser
 {
     /**
-     * Display user information
+     * Отображает информацию о пользователе
      * 
      * @return void
      */

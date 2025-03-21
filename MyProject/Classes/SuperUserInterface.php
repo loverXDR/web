@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace MyProject\Classes;
 
 /**
- * Interface SuperUserInterface
- * Defines the contract for super users
+ * Интерфейс SuperUserInterface
+ * Определяет контракт для привилегированных пользователей
  * 
  * @package MyProject\Classes
  */
 interface SuperUserInterface
 {
     /**
-     * Get user information as an associative array
+     * Получить информацию о пользователе в виде массива
      * 
      * @return array
      */

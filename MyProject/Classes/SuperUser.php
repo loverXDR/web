@@ -8,26 +8,26 @@ require_once __DIR__ . '/User.php';
 require_once __DIR__ . '/SuperUserInterface.php';
 
 /**
- * Class SuperUser
- * Represents a user with elevated privileges
+ * Класс SuperUser
+ * Представляет пользователя с расширенными привилегиями
  * 
  * @package MyProject\Classes
  */
 class SuperUser extends User implements SuperUserInterface
 {
-    /** @var string User's role */
+    /** @var string Роль пользователя */
     public string $role;
 
-    /** @var int Counter for number of SuperUser instances */
+    /** @var int Счетчик количества экземпляров класса SuperUser */
     private static int $superUserCount = 0;
 
     /**
-     * SuperUser constructor
+     * Конструктор класса SuperUser
      * 
-     * @param string $name User's name
-     * @param string $login User's login
-     * @param string $password User's password
-     * @param string $role User's role
+     * @param string $name Имя пользователя
+     * @param string $login Логин пользователя
+     * @param string $password Пароль пользователя
+     * @param string $role Роль пользователя
      */
     public function __construct(string $name, string $login, string $password, string $role)
     {
@@ -37,18 +37,18 @@ class SuperUser extends User implements SuperUserInterface
     }
 
     /**
-     * Display user information including role
+     * Отображает информацию о пользователе, включая роль
      * 
      * @return void
      */
     public function showInfo(): void
     {
         parent::showInfo();
-        echo "Role: {$this->role}\n";
+        echo "Роль: {$this->role}\n";
     }
 
     /**
-     * Get all user information as an associative array
+     * Получить всю информацию о пользователе в виде ассоциативного массива
      * 
      * @return array
      */
@@ -62,12 +62,21 @@ class SuperUser extends User implements SuperUserInterface
     }
 
     /**
-     * Get the total number of SuperUser instances
+     * Получить общее количество экземпляров класса SuperUser
      * 
      * @return int
      */
     public static function getSuperUserCount(): int
     {
         return self::$superUserCount;
+    }
+
+    /**
+     * Деструктор
+     */
+    public function __destruct()
+    {
+        parent::__destruct();
+        self::$superUserCount--;
     }
 } 

@@ -7,62 +7,66 @@ namespace MyProject\Classes;
 require_once __DIR__ . '/AbstractUser.php';
 
 /**
- * Class User
- * Represents a basic user in the system
+ * Класс User
+ * Представляет базового пользователя в системе
  * 
  * @package MyProject\Classes
  */
 class User extends AbstractUser
 {
-    /** @var string User's name */
+    /** @var string Имя пользователя */
     public string $name;
     
-    /** @var string User's login */
+    /** @var string Логин пользователя */
     public string $login;
     
-    /** @var string User's password */
+    /** @var string Пароль пользователя */
     private string $password;
 
-    /** @var int Counter for number of User instances */
+    /** @var int Счетчик количества экземпляров класса User */
     private static int $userCount = 0;
 
     /**
-     * User constructor
+     * Конструктор класса User
      * 
-     * @param string $name User's name
-     * @param string $login User's login
-     * @param string $password User's password
+     * @param string $name Имя пользователя
+     * @param string $login Логин пользователя
+     * @param string $password Пароль пользователя
      */
     public function __construct(string $name, string $login, string $password)
     {
         $this->name = $name;
         $this->login = $login;
         $this->password = $password;
-        self::$userCount++;
+        
+        // Увеличиваем счетчик только если это экземпляр класса User (не SuperUser)
+        if (get_class($this) === User::class) {
+            self::$userCount++;
+        }
     }
 
     /**
-     * Display user information
+     * Отображает информацию о пользователе
      * 
      * @return void
      */
     public function showInfo(): void
     {
-        echo "User Information:\n";
-        echo "Name: {$this->name}\n";
-        echo "Login: {$this->login}\n";
+        echo "Информация о пользователе:\n";
+        echo "Имя: {$this->name}\n";
+        echo "Логин: {$this->login}\n";
     }
 
     /**
-     * Destructor
+     * Деструктор
      */
     public function __destruct()
     {
-        echo "Пользователь {$this->login} удален.\n";
+        echo "Пользователь {$this->login} удален.<br>";
     }
 
     /**
-     * Get the total number of User instances
+     * Получить общее количество экземпляров класса User
      * 
      * @return int
      */

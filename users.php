@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// Autoloader function
+// Функция автозагрузки
 spl_autoload_register(function ($class) {
     $prefix = 'MyProject\\';
     $base_dir = __DIR__ . '/MyProject/';
@@ -23,17 +23,17 @@ spl_autoload_register(function ($class) {
 use MyProject\Classes\User;
 use MyProject\Classes\SuperUser;
 
-// Create regular users
+// Создание обычных пользователей
 $user1 = new User("John Doe", "john", "password123");
 $user2 = new User("Jane Smith", "jane", "password456");
 $user3 = new User("Bob Wilson", "bob", "password789");
 
-// Create a super user
+// Создание привилегированного пользователя
 $superUser = new SuperUser("Admin User", "admin", "adminpass", "Administrator");
 
-// Display information for all users
-echo "\nRegular Users Information:\n";
-echo "------------------------\n";
+// Отображение информации обо всех пользователях
+echo "\nИнформация об обычных пользователях:\n";
+echo "--------------------------------\n";
 $user1->showInfo();
 echo "\n";
 $user2->showInfo();
@@ -41,19 +41,19 @@ echo "\n";
 $user3->showInfo();
 echo "\n";
 
-echo "Super User Information:\n";
-echo "---------------------\n";
+echo "Информация о привилегированном пользователе:\n";
+echo "----------------------------------------\n";
 $superUser->showInfo();
 echo "\n";
 
-// Display SuperUser information using getInfo()
-echo "Super User Details (using getInfo()):\n";
-echo "--------------------------------\n";
+// Отображение информации о привилегированном пользователе через getInfo()
+echo "Детальная информация о привилегированном пользователе:\n";
+echo "------------------------------------------------\n";
 print_r($superUser->getInfo());
 echo "\n";
 
-// Display total count of users
-echo "\nStatistics:\n";
+// Отображение общего количества пользователей
+echo "\nСтатистика:\n";
 echo "-----------\n";
 echo "Всего обычных пользователей: " . User::getUserCount() . "\n";
-echo "Всего супер-пользователей: " . SuperUser::getSuperUserCount() . "\n"; 
+echo "Всего привилегированных пользователей: " . SuperUser::getSuperUserCount() . "\n"; 
