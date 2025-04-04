@@ -61,7 +61,7 @@ class Singleton
      */
     public function __wakeup()
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new \Exception("Невозможно десериализовать одиночку.");
     }
 
     /**
@@ -114,9 +114,9 @@ function clientCode()
     $s1 = Singleton::getInstance();
     $s2 = Singleton::getInstance();
     if ($s1 === $s2) {
-        echo "Singleton works, both variables contain the same instance.";
+        echo "Одиночка работает, обе переменные содержат один и тот же экземпляр.";
     } else {
-        echo "Singleton failed, variables contain different instances.";
+        echo "Одиночка не сработал, переменные содержат разные экземпляры.";
     }
 }
 

@@ -70,17 +70,17 @@ class ConcreteBuilder1 implements Builder
      */
     public function producePartA(): void
     {
-        $this->product->parts[] = "PartA1";
+        $this->product->parts[] = "ЧастьA1";
     }
 
     public function producePartB(): void
     {
-        $this->product->parts[] = "PartB1";
+        $this->product->parts[] = "ЧастьB1";
     }
 
     public function producePartC(): void
     {
-        $this->product->parts[] = "PartC1";
+        $this->product->parts[] = "ЧастьC1";
     }
 
     /**
@@ -145,7 +145,7 @@ class Product1
 
     public function listParts(): void
     {
-        echo "Product parts: " . implode(', ', $this->parts) . "\n\n";
+        echo "Части продукта: " . implode(', ', $this->parts) . "\n\n";
     }
 }
 
@@ -215,11 +215,11 @@ function clientCode(Director $director)
     $builder = new ConcreteBuilder1();
     $director->setBuilder($builder);
 
-    echo "Standard basic product:\n";
+    echo "Стандартный базовый продукт:\n";
     $director->buildMinimalViableProduct();
     $builder->getProduct()->listParts();
 
-    echo "Standard full featured product:\n";
+    echo "Стандартный полнофункциональный продукт:\n";
     $director->buildFullFeaturedProduct();
     $builder->getProduct()->listParts();
 
@@ -227,7 +227,7 @@ function clientCode(Director $director)
     //
     // RU: Помните, что паттерн Строитель можно использовать без класса
     // Директор.
-    echo "Custom product:\n";
+    echo "Пользовательский продукт:\n";
     $builder->producePartA();
     $builder->producePartC();
     $builder->getProduct()->listParts();

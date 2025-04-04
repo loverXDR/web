@@ -106,7 +106,7 @@ class Leaf extends Component
 {
     public function operation(): string
     {
-        return "Leaf";
+        return "Лист";
     }
 }
 
@@ -173,7 +173,7 @@ class Composite extends Component
             $results[] = $child->operation();
         }
 
-        return "Branch(" . implode("+", $results) . ")";
+        return "Ветка(" . implode("+", $results) . ")";
     }
 }
 
@@ -186,7 +186,7 @@ function clientCode(Component $component)
 {
     // ...
 
-    echo "RESULT: " . $component->operation();
+    echo "РЕЗУЛЬТАТ: " . $component->operation();
 
     // ...
 }
@@ -198,7 +198,7 @@ function clientCode(Component $component)
  * компоненты-листья...
  */
 $simple = new Leaf();
-echo "Client: I've got a simple component:\n";
+echo "Клиент: У меня есть простой компонент:\n";
 clientCode($simple);
 echo "\n\n";
 
@@ -215,7 +215,7 @@ $branch2 = new Composite();
 $branch2->add(new Leaf());
 $tree->add($branch1);
 $tree->add($branch2);
-echo "Client: Now I've got a composite tree:\n";
+echo "Клиент: Теперь у меня есть составное дерево:\n";
 clientCode($tree);
 echo "\n\n";
 
@@ -235,10 +235,10 @@ function clientCode2(Component $component1, Component $component2)
     if ($component1->isComposite()) {
         $component1->add($component2);
     }
-    echo "RESULT: " . $component1->operation();
+    echo "РЕЗУЛЬТАТ: " . $component1->operation();
 
     // ...
 }
 
-echo "Client: I don't need to check the components classes even when managing the tree:\n";
+echo "Клиент: Мне не нужно проверять классы компонентов даже при управлении деревом:\n";
 clientCode2($tree, $simple);

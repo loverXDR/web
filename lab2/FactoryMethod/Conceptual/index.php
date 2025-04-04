@@ -58,7 +58,7 @@ abstract class Creator
         // EN: Now, use the product.
         //
         // RU: Далее, работаем с этим продуктом.
-        $result = "Creator: The same creator's code has just worked with " .
+        $result = "Создатель: Тот же самый код создателя только что работал с " .
             $product->operation();
 
         return $result;
@@ -122,7 +122,7 @@ class ConcreteProduct1 implements Product
 {
     public function operation(): string
     {
-        return "{Result of the ConcreteProduct1}";
+        return "{Результат работы КонкретногоПродукта1}";
     }
 }
 
@@ -130,7 +130,7 @@ class ConcreteProduct2 implements Product
 {
     public function operation(): string
     {
-        return "{Result of the ConcreteProduct2}";
+        return "{Результат работы КонкретногоПродукта2}";
     }
 }
 
@@ -146,7 +146,7 @@ class ConcreteProduct2 implements Product
 function clientCode(Creator $creator)
 {
     // ...
-    echo "Client: I'm not aware of the creator's class, but it still works.\n"
+    echo "Клиент: Я не знаю о классе создателя, но он всё равно работает.\n"
         . $creator->someOperation();
     // ...
 }
@@ -158,9 +158,9 @@ function clientCode(Creator $creator)
  * RU: Приложение выбирает тип создателя в зависимости от конфигурации или
  * среды.
  */
-echo "App: Launched with the ConcreteCreator1.\n";
+echo "Приложение: Запущено с КонкретнымСоздателем1.\n";
 clientCode(new ConcreteCreator1());
 echo "\n\n";
 
-echo "App: Launched with the ConcreteCreator2.\n";
+echo "Приложение: Запущено с КонкретнымСоздателем2.\n";
 clientCode(new ConcreteCreator2());

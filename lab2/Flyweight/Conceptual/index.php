@@ -40,7 +40,7 @@ class Flyweight
     {
         $s = json_encode($this->sharedState);
         $u = json_encode($uniqueState);
-        echo "Flyweight: Displaying shared ($s) and unique ($u) state.\n";
+        echo "Легковес: Отображение общего ($s) и уникального ($u) состояния.\n";
     }
 }
 
@@ -93,10 +93,10 @@ class FlyweightFactory
         $key = $this->getKey($sharedState);
 
         if (!isset($this->flyweights[$key])) {
-            echo "FlyweightFactory: Can't find a flyweight, creating new one.\n";
+            echo "Фабрика Легковесов: Не могу найти легковес, создаю новый.\n";
             $this->flyweights[$key] = new Flyweight($sharedState);
         } else {
-            echo "FlyweightFactory: Reusing existing flyweight.\n";
+            echo "Фабрика Легковесов: Повторное использование существующего легковеса.\n";
         }
 
         return $this->flyweights[$key];
@@ -105,7 +105,7 @@ class FlyweightFactory
     public function listFlyweights(): void
     {
         $count = count($this->flyweights);
-        echo "\nFlyweightFactory: I have $count flyweights:\n";
+        echo "\nФабрика Легковесов: У меня $count легковесов:\n";
         foreach ($this->flyweights as $key => $flyweight) {
             echo $key . "\n";
         }
@@ -120,11 +120,11 @@ class FlyweightFactory
  * на этапе инициализации приложения.
  */
 $factory = new FlyweightFactory([
-    ["Chevrolet", "Camaro2018", "pink"],
-    ["Mercedes Benz", "C300", "black"],
-    ["Mercedes Benz", "C500", "red"],
-    ["BMW", "M5", "red"],
-    ["BMW", "X6", "white"],
+    ["Chevrolet", "Camaro2018", "розовый"],
+    ["Mercedes Benz", "C300", "черный"],
+    ["Mercedes Benz", "C500", "красный"],
+    ["BMW", "M5", "красный"],
+    ["BMW", "X6", "белый"],
     // ...
 ]);
 $factory->listFlyweights();
@@ -135,7 +135,7 @@ function addCarToPoliceDatabase(
     FlyweightFactory $ff, $plates, $owner,
     $brand, $model, $color
 ) {
-    echo "\nClient: Adding a car to database.\n";
+    echo "\nКлиент: Добавляю автомобиль в базу данных.\n";
     $flyweight = $ff->getFlyweight([$brand, $model, $color]);
 
     // EN: The client code either stores or calculates extrinsic state and
@@ -148,18 +148,18 @@ function addCarToPoliceDatabase(
 
 addCarToPoliceDatabase($factory,
     "CL234IR",
-    "James Doe",
+    "Джеймс Доу",
     "BMW",
     "M5",
-    "red",
+    "красный",
 );
 
 addCarToPoliceDatabase($factory,
     "CL234IR",
-    "James Doe",
+    "Джеймс Доу",
     "BMW",
     "X1",
-    "red",
+    "красный",
 );
 
 $factory->listFlyweights();

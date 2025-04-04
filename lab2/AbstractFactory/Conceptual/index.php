@@ -98,7 +98,7 @@ class ConcreteProductA1 implements AbstractProductA
 {
     public function usefulFunctionA(): string
     {
-        return "The result of the product A1.";
+        return "Результат работы продукта A1.";
     }
 }
 
@@ -106,7 +106,7 @@ class ConcreteProductA2 implements AbstractProductA
 {
     public function usefulFunctionA(): string
     {
-        return "The result of the product A2.";
+        return "Результат работы продукта A2.";
     }
 }
 
@@ -151,7 +151,7 @@ class ConcreteProductB1 implements AbstractProductB
 {
     public function usefulFunctionB(): string
     {
-        return "The result of the product B1.";
+        return "Результат работы продукта B1.";
     }
 
     /**
@@ -167,7 +167,7 @@ class ConcreteProductB1 implements AbstractProductB
     {
         $result = $collaborator->usefulFunctionA();
 
-        return "The result of the B1 collaborating with the ({$result})";
+        return "Результат совместной работы B1 с ({$result})";
     }
 }
 
@@ -175,7 +175,7 @@ class ConcreteProductB2 implements AbstractProductB
 {
     public function usefulFunctionB(): string
     {
-        return "The result of the product B2.";
+        return "Результат работы продукта B2.";
     }
 
     /**
@@ -191,7 +191,7 @@ class ConcreteProductB2 implements AbstractProductB
     {
         $result = $collaborator->usefulFunctionA();
 
-        return "The result of the B2 collaborating with the ({$result})";
+        return "Результат совместной работы B2 с ({$result})";
     }
 }
 
@@ -218,10 +218,10 @@ function clientCode(AbstractFactory $factory)
  *
  * RU: Клиентский код может работать с любым конкретным классом фабрики.
  */
-echo "Client: Testing client code with the first factory type:\n";
+echo "Клиент: Тестирование клиентского кода с первым типом фабрики:\n";
 clientCode(new ConcreteFactory1());
 
 echo "\n";
 
-echo "Client: Testing the same client code with the second factory type:\n";
+echo "Клиент: Тестирование того же клиентского кода со вторым типом фабрики:\n";
 clientCode(new ConcreteFactory2());

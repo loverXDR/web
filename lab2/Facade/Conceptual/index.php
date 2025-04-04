@@ -59,10 +59,10 @@ class Facade
      */
     public function operation(): string
     {
-        $result = "Facade initializes subsystems:\n";
+        $result = "Фасад инициализирует подсистемы:\n";
         $result .= $this->subsystem1->operation1();
         $result .= $this->subsystem2->operation1();
-        $result .= "Facade orders subsystems to perform the action:\n";
+        $result .= "Фасад заказывает подсистемам выполнить действие:\n";
         $result .= $this->subsystem1->operationN();
         $result .= $this->subsystem2->operationZ();
 
@@ -83,14 +83,14 @@ class Subsystem1
 {
     public function operation1(): string
     {
-        return "Subsystem1: Ready!\n";
+        return "Подсистема1: Готово!\n";
     }
 
     // ...
 
     public function operationN(): string
     {
-        return "Subsystem1: Go!\n";
+        return "Подсистема1: Вперёд!\n";
     }
 }
 
@@ -103,14 +103,14 @@ class Subsystem2
 {
     public function operation1(): string
     {
-        return "Subsystem2: Get ready!\n";
+        return "Подсистема2: Приготовиться!\n";
     }
 
     // ...
 
     public function operationZ(): string
     {
-        return "Subsystem2: Fire!\n";
+        return "Подсистема2: Огонь!\n";
     }
 }
 

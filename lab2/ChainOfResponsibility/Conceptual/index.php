@@ -79,7 +79,7 @@ class MonkeyHandler extends AbstractHandler
     public function handle(string $request): ?string
     {
         if ($request === "Banana") {
-            return "Monkey: I'll eat the " . $request . ".\n";
+            return "Обезьяна: Я съем " . $request . ".\n";
         } else {
             return parent::handle($request);
         }
@@ -91,7 +91,7 @@ class SquirrelHandler extends AbstractHandler
     public function handle(string $request): ?string
     {
         if ($request === "Nut") {
-            return "Squirrel: I'll eat the " . $request . ".\n";
+            return "Белка: Я съем " . $request . ".\n";
         } else {
             return parent::handle($request);
         }
@@ -103,7 +103,7 @@ class DogHandler extends AbstractHandler
     public function handle(string $request): ?string
     {
         if ($request === "MeatBall") {
-            return "Dog: I'll eat the " . $request . ".\n";
+            return "Собака: Я съем " . $request . ".\n";
         } else {
             return parent::handle($request);
         }
@@ -121,12 +121,12 @@ class DogHandler extends AbstractHandler
 function clientCode(Handler $handler)
 {
     foreach (["Nut", "Banana", "Cup of coffee"] as $food) {
-        echo "Client: Who wants a " . $food . "?\n";
+        echo "Клиент: Кто хочет " . $food . "?\n";
         $result = $handler->handle($food);
         if ($result) {
             echo "  " . $result;
         } else {
-            echo "  " . $food . " was left untouched.\n";
+            echo "  " . $food . " осталось нетронутым.\n";
         }
     }
 }
@@ -149,9 +149,9 @@ $monkey->setNext($squirrel)->setNext($dog);
  * RU: Клиент должен иметь возможность отправлять запрос любому обработчику, а
  * не только первому в цепочке.
  */
-echo "Chain: Monkey > Squirrel > Dog\n\n";
+echo "Цепочка: Обезьяна > Белка > Собака\n\n";
 clientCode($monkey);
 echo "\n";
 
-echo "Subchain: Squirrel > Dog\n\n";
+echo "Подцепочка: Белка > Собака\n\n";
 clientCode($squirrel);

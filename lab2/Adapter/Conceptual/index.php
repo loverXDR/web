@@ -23,7 +23,7 @@ class Target
 {
     public function request(): string
     {
-        return "Target: The default target's behavior.";
+        return "Целевой класс: Поведение целевого класса по умолчанию.";
     }
 }
 
@@ -63,7 +63,7 @@ class Adapter extends Target
 
     public function request(): string
     {
-        return "Adapter: (TRANSLATED) " . strrev($this->adaptee->specificRequest());
+        return "Адаптер: (ПЕРЕВЕДЕНО) " . strrev($this->adaptee->specificRequest());
     }
 }
 
@@ -77,16 +77,16 @@ function clientCode(Target $target)
     echo $target->request();
 }
 
-echo "Client: I can work just fine with the Target objects:\n";
+echo "Клиент: Я могу нормально работать с объектами Целевого класса:\n";
 $target = new Target();
 clientCode($target);
 echo "\n\n";
 
 $adaptee = new Adaptee();
-echo "Client: The Adaptee class has a weird interface. See, I don't understand it:\n";
-echo "Adaptee: " . $adaptee->specificRequest();
+echo "Клиент: У Адаптируемого класса странный интерфейс. Видите, я его не понимаю:\n";
+echo "Адаптируемый класс: " . $adaptee->specificRequest();
 echo "\n\n";
 
-echo "Client: But I can work with it via the Adapter:\n";
+echo "Клиент: Но я могу работать с ним через Адаптер:\n";
 $adapter = new Adapter($adaptee);
 clientCode($adapter);

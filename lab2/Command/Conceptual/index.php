@@ -43,7 +43,7 @@ class SimpleCommand implements Command
 
     public function execute(): void
     {
-        echo "SimpleCommand: See, I can do simple things like printing (" . $this->payload . ")\n";
+        echo "ПростаяКоманда: Смотрите, я могу делать простые вещи, например, печатать (" . $this->payload . ")\n";
     }
 }
 
@@ -92,7 +92,7 @@ class ComplexCommand implements Command
      */
     public function execute(): void
     {
-        echo "ComplexCommand: Complex stuff should be done by a receiver object.\n";
+        echo "СложнаяКоманда: Сложные вещи должны выполняться объектом-получателем.\n";
         $this->receiver->doSomething($this->a);
         $this->receiver->doSomethingElse($this->b);
     }
@@ -111,12 +111,12 @@ class Receiver
 {
     public function doSomething(string $a): void
     {
-        echo "Receiver: Working on (" . $a . ".)\n";
+        echo "Получатель: Работаю над (" . $a . ".)\n";
     }
 
     public function doSomethingElse(string $b): void
     {
-        echo "Receiver: Also working on (" . $b . ".)\n";
+        echo "Получатель: Также работаю над (" . $b . ".)\n";
     }
 }
 
@@ -164,14 +164,14 @@ class Invoker
      */
     public function doSomethingImportant(): void
     {
-        echo "Invoker: Does anybody want something done before I begin?\n";
+        echo "Отправитель: Хочет ли кто-нибудь, чтобы что-то сделали до того, как я начну?\n";
         if ($this->onStart instanceof Command) {
             $this->onStart->execute();
         }
 
-        echo "Invoker: ...doing something really important...\n";
+        echo "Отправитель: ...выполняю что-то действительно важное...\n";
 
-        echo "Invoker: Does anybody want something done after I finish?\n";
+        echo "Отправитель: Хочет ли кто-нибудь, чтобы что-то сделали после того, как я закончу?\n";
         if ($this->onFinish instanceof Command) {
             $this->onFinish->execute();
         }
@@ -184,8 +184,8 @@ class Invoker
  * RU: Клиентский код может параметризовать отправителя любыми командами.
  */
 $invoker = new Invoker();
-$invoker->setOnStart(new SimpleCommand("Say Hi!"));
+$invoker->setOnStart(new SimpleCommand("Привет!"));
 $receiver = new Receiver();
-$invoker->setOnFinish(new ComplexCommand($receiver, "Send email", "Save report"));
+$invoker->setOnFinish(new ComplexCommand($receiver, "Отправить email", "Сохранить отчет"));
 
 $invoker->doSomethingImportant();

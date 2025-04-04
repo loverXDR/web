@@ -37,7 +37,7 @@ class ConcreteComponent implements Component
 {
     public function operation(): string
     {
-        return "ConcreteComponent";
+        return "КонкретныйКомпонент";
     }
 }
 
@@ -97,7 +97,7 @@ class ConcreteDecoratorA extends Decorator
      */
     public function operation(): string
     {
-        return "ConcreteDecoratorA(" . parent::operation() . ")";
+        return "КонкретныйДекораторА(" . parent::operation() . ")";
     }
 }
 
@@ -112,7 +112,7 @@ class ConcreteDecoratorB extends Decorator
 {
     public function operation(): string
     {
-        return "ConcreteDecoratorB(" . parent::operation() . ")";
+        return "КонкретныйДекораторB(" . parent::operation() . ")";
     }
 }
 
@@ -129,7 +129,7 @@ function clientCode(Component $component)
 {
     // ...
 
-    echo "RESULT: " . $component->operation();
+    echo "РЕЗУЛЬТАТ: " . $component->operation();
 
     // ...
 }
@@ -141,7 +141,7 @@ function clientCode(Component $component)
  * компоненты...
  */
 $simple = new ConcreteComponent();
-echo "Client: I've got a simple component:\n";
+echo "Клиент: У меня есть простой компонент:\n";
 clientCode($simple);
 echo "\n\n";
 
@@ -158,5 +158,5 @@ echo "\n\n";
  */
 $decorator1 = new ConcreteDecoratorA($simple);
 $decorator2 = new ConcreteDecoratorB($decorator1);
-echo "Client: Now I've got a decorated component:\n";
+echo "Клиент: Теперь у меня есть декорированный компонент:\n";
 clientCode($decorator2);
