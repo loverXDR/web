@@ -37,113 +37,215 @@ $superUser = new SuperUser("Admin User", "admin", "adminpass", "Administrator");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Система управления пользователями</title>
+    <title>Лабораторные работы по PHP</title>
     <style>
+        :root {
+            --primary-color: #4a6da7;
+            --secondary-color: #5d93bb;
+            --accent-color: #f0ad4e;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #ddd;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
         }
-        .container {
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .lab-card {
             background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--shadow-color);
+        }
+
+        .lab-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .lab-content {
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
-        h1, h2 {
-            color: #333;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+
+        .lab-description {
+            margin-bottom: 20px;
+            flex-grow: 1;
         }
-        .user-card {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 15px;
-            margin: 10px 0;
+
+        .lab-link {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
         }
-        .super-user-card {
-            background-color: #e8f4ff;
-            border: 1px solid #b8daff;
+
+        .lab-link:hover {
+            background-color: #e09a3c;
         }
-        .stats {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 4px;
+
+        .completed-badge {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            vertical-align: middle;
         }
-        .user-info {
-            margin: 5px 0;
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Система управления пользователями</h1>
-        <h2>Обычные пользователи</h2>
-        <?php
-        $regularUsers = [$user1, $user2, $user3];
-        foreach ($regularUsers as $user) {
-            echo '<div class="user-card">';
-            echo '<div class="user-info"><strong>Имя:</strong> ' . htmlspecialchars($user->name) . '</div>';
-            echo '<div class="user-info"><strong>Логин:</strong> ' . htmlspecialchars($user->login) . '</div>';
-            echo '</div>';
-        }
-        ?>
+    <header>
+        <h1>Лабораторные работы по PHP</h1>
+        <div class="subtitle">Учебный проект по программированию на языке PHP</div>
+    </header>
 
-        <h2>Привилегированный пользователь</h2>
-        <div class="user-card super-user-card">
-            <?php
-            $superUserInfo = $superUser->getInfo();
-            foreach ($superUserInfo as $key => $value) {
-                $labels = [
-                    'name' => 'Имя',
-                    'login' => 'Логин',
-                    'role' => 'Роль'
-                ];
-                $label = $labels[$key] ?? ucfirst($key);
-                echo '<div class="user-info"><strong>' . $label . ':</strong> ' . htmlspecialchars($value) . '</div>';
-            }
-            ?>
+    <div class="main-container">
+        <div class="lab-card">
+            <div class="lab-header">
+                Лабораторная работа №1 <span class="completed-badge">Выполнено</span>
+            </div>
+            <div class="lab-content">
+                <div class="lab-description">
+                    <p>Система управления пользователями. Реализация классов User и SuperUser с использованием ООП в PHP.</p>
+                    <p>Демонстрация создания, вывода информации и удаления пользователей.</p>
+                </div>
+                <a href="lab1.php" class="lab-link">Открыть работу</a>
+            </div>
         </div>
 
-        <div class="stats">
-            <h2>Статистика</h2>
-            <p>Всего обычных пользователей: <?php echo User::getUserCount(); ?></p>
-            <p>Всего привилегированных пользователей: <?php echo SuperUser::getSuperUserCount(); ?></p>
+        <div class="lab-card">
+            <div class="lab-header">
+                Лабораторная работа №2 <span class="completed-badge">Выполнено</span>
+            </div>
+            <div class="lab-content">
+                <div class="lab-description">
+                    <p>Паттерны проектирования в PHP. Изучение и реализация популярных паттернов проектирования: порождающих, структурных и поведенческих.</p>
+                    <p>Демонстрация работы каждого паттерна на практических примерах.</p>
+                </div>
+                <a href="lab2.php" class="lab-link">Открыть работу</a>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="lab-header">
+                Лабораторная работа №3
+            </div>
+            <div class="lab-content">
+                <div class="lab-description">
+                    <p>Обработка форм и валидация данных. Реализация системы регистрации и авторизации пользователей.</p>
+                    <p>Защита от XSS, SQL-инъекций и других уязвимостей.</p>
+                </div>
+                <a href="lab3.php" class="lab-link">Открыть работу</a>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="lab-header">
+                Лабораторная работа №4
+            </div>
+            <div class="lab-content">
+                <div class="lab-description">
+                    <p>Работа с файлами и сессиями. Загрузка и обработка файлов, сохранение состояния между запросами.</p>
+                    <p>Реализация системы хранения пользовательских настроек.</p>
+                </div>
+                <a href="lab4.php" class="lab-link">Открыть работу</a>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="lab-header">
+                Лабораторная работа №5
+            </div>
+            <div class="lab-content">
+                <div class="lab-description">
+                    <p>Работа с API и асинхронными запросами. Использование AJAX для создания динамических веб-приложений.</p>
+                    <p>Интеграция с внешними сервисами и обработка JSON-данных.</p>
+                </div>
+                <a href="lab5.php" class="lab-link">Открыть работу</a>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="lab-header">
+                Лабораторная работа №6
+            </div>
+            <div class="lab-content">
+                <div class="lab-description">
+                    <p>Разработка REST API. Создание и документирование API для взаимодействия с внешними системами.</p>
+                    <p>Реализация механизмов аутентификации и авторизации.</p>
+                </div>
+                <a href="lab6.php" class="lab-link">Открыть работу</a>
+            </div>
         </div>
     </div>
 
-    <?php
-    // Удаление пользователей
-    echo '<div class="container" style="margin-top: 20px;">';
-    echo '<h2>Удаление пользователей</h2>';
-    echo '<div class="user-card">';
-    
-    // Начинаем буферизацию вывода
-    
-    
-    // Сначала очищаем массив обычных пользователей
-    unset($regularUsers);
-    
-    // Теперь удаляем отдельные переменные пользователей
-    unset($user3);
-    unset($user2);
-    unset($user1);
-    
-    // В конце удаляем привилегированного пользователя
-    unset($superUser);
-    
-    // Получаем содержимое буфера и очищаем его
-    
-    
-    // Выводим все сообщения внутри блока
-    
-    
-    
-    
-    ?>
+    <div class="footer">
+        <p>PHP Student Project &copy; <?php echo date('Y'); ?>. Все права защищены.</p>
+    </div>
 </body>
 </html>
