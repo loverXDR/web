@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Method Pattern</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+            margin: 20px auto;
+        }
+        .description {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Factory Method Pattern Class Diagram</h1>
+    
+    <div class="description">
+        <p>The Factory Method pattern is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.</p>
+        <p>In our implementation, we have an abstract UserFactory class that defines the factory method createUser(), and a ConcreteUserFactory that implements this method to create different types of users based on their type.</p>
+    </div>
+    
+    <!-- Class diagram image will be inserted here -->
+    <img src="Factory Method Pattern.png" alt="Factory Method Pattern Class Diagram">
+    
+    <div class="implementation-notes">
+        <h2>Implementation Notes</h2>
+        <p>Our implementation includes:</p>
+        <ul>
+            <li>An abstract <code>UserFactory</code> class with the abstract factory method <code>createUser()</code></li>
+            <li>A concrete factory class <code>ConcreteUserFactory</code> that creates different user types</li>
+            <li>A <code>User</code> interface that defines common methods for all user types</li>
+            <li>Concrete user classes (<code>AdminUser</code>, <code>CustomerUser</code>, <code>ManagerUser</code>) that implement the User interface</li>
+        </ul>
+    </div>
+</body>
+</html> 

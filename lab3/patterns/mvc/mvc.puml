@@ -1,0 +1,80 @@
+@startuml MVC Pattern
+
+package "Model" {
+  class Model {
+    #data: array
+    +__construct()
+    +loadData(data: array)
+    +getData(): array
+  }
+
+  class UserModel {
+    +__construct()
+    +getUserById(id: int): ?array
+    +getUsersByType(type: string): array
+  }
+}
+
+package "View" {
+  abstract class View {
+    #model: Model
+    +__construct(model: Model)
+    +{abstract} render(): string
+  }
+
+  class HtmlView {
+    +render(): string
+  }
+
+  class JsonView {
+    +render(): string
+  }
+
+  class TextView {
+    +render(): string
+  }
+
+  class MarkdownView {
+    +render(): string
+  }
+}
+
+package "Controller" {
+  class Controller {
+    -model: Model
+    -view: View
+    +__construct(model: Model)
+    +setView(view: View)
+    +getView(): View
+    +getModel(): Model
+    +displayOutput(): string
+  }
+
+  class UserController {
+    +__construct()
+    +displayHtml(): string
+    +displayJson(): string
+    +displayText(): string
+    +displayMarkdown(): string
+  }
+}
+
+' Relationships
+Model <|-- UserModel
+View <|-- HtmlView
+View <|-- JsonView
+View <|-- TextView
+View <|-- MarkdownView
+Controller <|-- UserController
+
+View o-- Model : has >
+Controller o-- Model : has >
+Controller o-- View : has >
+
+UserController ..> HtmlView : creates
+UserController ..> JsonView : creates
+UserController ..> TextView : creates
+UserController ..> MarkdownView : creates
+UserController ..> UserModel : creates
+
+@enduml 

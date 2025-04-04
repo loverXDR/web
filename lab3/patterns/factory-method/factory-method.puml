@@ -1,0 +1,65 @@
+@startuml Factory Method Pattern
+
+interface User {
+  +getId(): int
+  +getName(): string
+  +getEmail(): string
+  +getType(): string
+  +getInfo(): string
+}
+
+class AdminUser {
+  -id: int
+  -name: string
+  -email: string
+  +__construct(data: array)
+  +getId(): int
+  +getName(): string
+  +getEmail(): string
+  +getType(): string
+  +getInfo(): string
+}
+
+class CustomerUser {
+  -id: int
+  -name: string
+  -email: string
+  +__construct(data: array)
+  +getId(): int
+  +getName(): string
+  +getEmail(): string
+  +getType(): string
+  +getInfo(): string
+}
+
+class ManagerUser {
+  -id: int
+  -name: string
+  -email: string
+  +__construct(data: array)
+  +getId(): int
+  +getName(): string
+  +getEmail(): string
+  +getType(): string
+  +getInfo(): string
+}
+
+abstract class UserFactory {
+  +{abstract} createUser(data: array): User
+  +getUser(data: array): User
+}
+
+class ConcreteUserFactory {
+  +createUser(data: array): User
+}
+
+User <|.. AdminUser
+User <|.. CustomerUser
+User <|.. ManagerUser
+
+UserFactory <|-- ConcreteUserFactory
+ConcreteUserFactory ..> AdminUser : creates
+ConcreteUserFactory ..> CustomerUser : creates
+ConcreteUserFactory ..> ManagerUser : creates
+
+@enduml 

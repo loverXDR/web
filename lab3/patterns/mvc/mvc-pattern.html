@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVC Pattern</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+            margin: 20px auto;
+        }
+        .description {
+            margin-bottom: 30px;
+        }
+        .component {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Model-View-Controller (MVC) Pattern</h1>
+    
+    <div class="description">
+        <p>The Model-View-Controller (MVC) is an architectural pattern that separates an application into three main logical components: the model, the view, and the controller. Each of these components are built to handle specific development aspects of an application.</p>
+    </div>
+    
+    <!-- Class diagram image will be inserted here -->
+    <img src="MVC Pattern.png" alt="MVC Pattern Class Diagram">
+    
+    <h2>Pattern Components</h2>
+    
+    <div class="component">
+        <h3>Model</h3>
+        <p>The Model component corresponds to all the data-related logic that the user works with. It represents the data that is being transferred between the Controller and View components.</p>
+        <p>In our implementation:</p>
+        <ul>
+            <li><code>Model</code>: Base class for all models</li>
+            <li><code>UserModel</code>: Specific model for user data</li>
+        </ul>
+    </div>
+    
+    <div class="component">
+        <h3>View</h3>
+        <p>The View component is used for all the UI logic of the application. It generates output based on the model's data.</p>
+        <p>In our implementation:</p>
+        <ul>
+            <li><code>View</code>: Abstract base class for all views</li>
+            <li><code>HtmlView</code>: Displays data as HTML</li>
+            <li><code>JsonView</code>: Displays data as JSON</li>
+            <li><code>TextView</code>: Displays data as plain text</li>
+            <li><code>MarkdownView</code>: Displays data in Markdown format</li>
+        </ul>
+    </div>
+    
+    <div class="component">
+        <h3>Controller</h3>
+        <p>The Controller acts on both Model and View. It controls the data flow into model objects and updates the view whenever data changes.</p>
+        <p>In our implementation:</p>
+        <ul>
+            <li><code>Controller</code>: Base controller class</li>
+            <li><code>UserController</code>: Controller for user data with methods for different views</li>
+        </ul>
+    </div>
+</body>
+</html> 

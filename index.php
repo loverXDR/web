@@ -193,12 +193,12 @@ $superUser = new SuperUser("Admin User", "admin", "adminpass", "Administrator");
 
         <div class="lab-card">
             <div class="lab-header">
-                Лабораторная работа №3
+                Лабораторная работа №3 <span class="completed-badge">Выполнено</span>
             </div>
             <div class="lab-content">
                 <div class="lab-description">
-                    <p>Обработка форм и валидация данных. Реализация системы регистрации и авторизации пользователей.</p>
-                    <p>Защита от XSS, SQL-инъекций и других уязвимостей.</p>
+                    <p>Паттерн Модель-Представление-Контроллер (MVC). Реализация паттернов проектирования: Одиночка (Singleton), Фабричный метод (Factory Method).</p>
+                    <p>Создание диаграмм классов с использованием PlantUML и реализация MarkdownView.</p>
                 </div>
                 <a href="lab3.php" class="lab-link">Открыть работу</a>
             </div>
