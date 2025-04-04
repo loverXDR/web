@@ -1,2 +1,0 @@
-2025-04-04 06:43:24 - Attempting to load: Lab2\DesignPatterns\Creational\Singleton from: /home/lover/PHP_student/vendor/../Lab2/DesignPatterns/Creational/Singleton.php
-Autoloader: File not found: /home/lover/PHP_student/vendor/../Lab2/DesignPatterns/Creational/Singleton.php for class: Lab2\DesignPatterns\Creational\SingletonAutoloader: Trying with corrected case: /home/lover/PHP_student/vendor/../Lab2/DesignPatterns/Creational/Singleton.php

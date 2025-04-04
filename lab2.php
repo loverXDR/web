@@ -1,129 +1,5 @@
 <?php
-// Подключаем автозагрузчик классов
-require_once __DIR__ . '/vendor/autoload.php';
-
-// Подключаем демо-класс для паттернов проектирования
-require_once __DIR__ . '/lab2/demo.php';
-
-// Информация о паттернах проектирования
-$patterns = [
-    'creational' => [
-        'title' => 'Порождающие паттерны',
-        'description' => 'Отвечают за удобное и безопасное создание новых объектов или даже целых семейств объектов.',
-        'patterns' => [
-            [
-                'name' => 'Singleton (Одиночка)',
-                'description' => 'Гарантирует, что у класса есть только один экземпляр, и предоставляет к нему глобальную точку доступа.',
-                'example' => 'Singleton.php',
-                'demo' => 'demonstrateSingleton'
-            ],
-            [
-                'name' => 'Factory Method (Фабричный метод)',
-                'description' => 'Определяет общий интерфейс для создания объектов в суперклассе, позволяя подклассам изменять тип создаваемых объектов.',
-                'example' => 'FactoryMethod.php',
-                'demo' => 'demonstrateFactoryMethod'
-            ]
-        ]
-    ],
-    'structural' => [
-        'title' => 'Структурные паттерны',
-        'description' => 'Отвечают за эффективное объединение объектов и классов в более крупные структуры, сохраняя при этом гибкость и эффективность этих структур.',
-        'patterns' => [
-            [
-                'name' => 'Adapter (Адаптер)',
-                'description' => 'Позволяет объектам с несовместимыми интерфейсами работать вместе.',
-                'example' => 'Adapter.php',
-                'demo' => 'demonstrateAdapter'
-            ],
-            [
-                'name' => 'Decorator (Декоратор)',
-                'description' => 'Позволяет динамически добавлять объектам новую функциональность, оборачивая их в полезные «обёртки».',
-                'example' => 'Decorator.php',
-                'demo' => 'demonstrateDecorator'
-            ]
-        ]
-    ],
-    'behavioral' => [
-        'title' => 'Поведенческие паттерны',
-        'description' => 'Определяют взаимодействие между объектами, увеличивая гибкость в коммуникации.',
-        'patterns' => [
-            [
-                'name' => 'Observer (Наблюдатель)',
-                'description' => 'Создаёт механизм подписки, позволяющий одним объектам следить и реагировать на события, происходящие в других объектах.',
-                'example' => 'Observer.php',
-                'demo' => 'demonstrateObserver'
-            ],
-            [
-                'name' => 'Strategy (Стратегия)',
-                'description' => 'Определяет семейство схожих алгоритмов и помещает каждый из них в собственный класс, после чего алгоритмы можно взаимозаменять прямо во время исполнения программы.',
-                'example' => 'Strategy.php',
-                'demo' => 'demonstrateStrategy'
-            ]
-        ]
-    ]
-];
-
-// Запускаем демонстрацию, если установлен соответствующий параметр
-$demoResults = [];
-if (isset($_GET['demo'])) {
-    $demo = strtolower($_GET['demo']);
-    
-    switch ($demo) {
-        case 'singleton':
-            $demoResults = Lab2\PatternDemo::demonstrateSingleton();
-            break;
-        case 'factory':
-            $demoResults = Lab2\PatternDemo::demonstrateFactoryMethod();
-            break;
-        case 'adapter':
-            $demoResults = Lab2\PatternDemo::demonstrateAdapter();
-            break;
-        case 'decorator':
-            $demoResults = Lab2\PatternDemo::demonstrateDecorator();
-            break;
-        case 'observer':
-            $demoResults = Lab2\PatternDemo::demonstrateObserver();
-            break;
-        case 'strategy':
-            $demoResults = Lab2\PatternDemo::demonstrateStrategy();
-            break;
-        case 'all':
-            $demoResults = Lab2\PatternDemo::runAllDemos();
-            break;
-    }
-}
-
-// Функция для получения исходного кода файла
-function getSourceCode($file) {
-    // Разбиваем путь на части для правильной капитализации директорий
-    $parts = explode('/', $file);
-    if (count($parts) > 1) {
-        // Капитализируем первую букву директории (Creational, Structural, Behavioral)
-        $parts[0] = ucfirst($parts[0]);
-    }
-    $file = implode('/', $parts);
-    
-    $file = __DIR__ . '/lab2/DesignPatterns/' . $file;
-    if (file_exists($file)) {
-        return htmlspecialchars(file_get_contents($file));
-    }
-    
-    // Попытка найти файл с учетом различных вариантов регистра
-    $dirname = dirname($file);
-    $basename = basename($file);
-    
-    if (is_dir($dirname)) {
-        $files = scandir($dirname);
-        foreach ($files as $f) {
-            if (strcasecmp($f, $basename) === 0) {
-                $correctFile = $dirname . '/' . $f;
-                return htmlspecialchars(file_get_contents($correctFile));
-            }
-        }
-    }
-    
-    return "Файл не найден: $file";
-}
+// Lab 2 - Design Patterns Implementation
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -131,9 +7,6 @@ function getSourceCode($file) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лабораторная работа №2 - Паттерны проектирования</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/php.min.js"></script>
     <style>
         :root {
             --primary-color: #4a6da7;
@@ -143,9 +16,8 @@ function getSourceCode($file) {
             --light-bg: #f8f9fa;
             --border-color: #ddd;
             --shadow-color: rgba(0, 0, 0, 0.1);
-            --code-bg: #f7f8fb;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 1200px;
@@ -155,270 +27,488 @@ function getSourceCode($file) {
             color: var(--text-color);
             line-height: 1.6;
         }
-        
+
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
-        
+
         h1 {
             color: var(--primary-color);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
         }
-        
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 30px;
-        }
-        
-        h3 {
+
+        .subtitle {
             color: var(--secondary-color);
-            margin-top: 20px;
-        }
-        
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px var(--shadow-color);
+            font-size: 1.2rem;
             margin-bottom: 30px;
         }
-        
-        .pattern-group {
-            margin-bottom: 40px;
-        }
-        
-        .pattern-card {
-            background-color: var(--light-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .pattern-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .pattern-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin: 0;
-        }
-        
-        .pattern-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #e09a3c;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-        }
-        
-        .btn-primary:hover {
-            background-color: #3a5c96;
-        }
-        
-        .btn-info {
-            background-color: var(--secondary-color);
-        }
-        
-        .btn-info:hover {
-            background-color: #4d83ab;
-        }
-        
-        .intro {
-            margin-bottom: 30px;
-        }
-        
-        .code-block {
-            background-color: var(--code-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 15px;
-            margin: 20px 0;
-            overflow-x: auto;
-        }
-        
-        pre {
-            margin: 0;
-            white-space: pre-wrap;
-        }
-        
-        code {
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 0.9rem;
-        }
-        
-        .result-block {
-            background-color: #f0f8ff;
-            border: 1px solid #b8daff;
-            border-radius: 4px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        
-        .result-item {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        
-        .tabs {
-            display: flex;
-            margin-top: 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            border-bottom: none;
-            margin-right: 5px;
-            border-radius: 4px 4px 0 0;
-        }
-        
-        .tab.active {
-            background-color: white;
-            border-color: var(--border-color);
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-        
-        .tab-content {
-            display: none;
-            padding: 20px;
-            background-color: white;
-            border: 1px solid var(--border-color);
-            border-top: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
+
         .back-link {
             display: inline-block;
-            margin: 20px 0;
+            margin-bottom: 20px;
             color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
         }
-        
+
         .back-link:hover {
             text-decoration: underline;
         }
-        
-        .demo-nav {
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .pattern-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .pattern-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
             display: flex;
-            justify-content: center;
-            margin: 20px 0;
+            flex-direction: column;
+        }
+
+        .pattern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--shadow-color);
+        }
+
+        .pattern-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .pattern-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pattern-description {
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .pattern-links {
+            display: flex;
+            flex-direction: column;
             gap: 10px;
-            flex-wrap: wrap;
+        }
+
+        .pattern-link {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .pattern-link:hover {
+            background-color: #e09a3c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Паттерны проектирования в PHP</h1>
-            <p>Лабораторная работа №2: Изучение и реализация популярных паттернов проектирования в PHP</p>
-        </header>
-        
-        <div class="intro">
-            <h2>Введение</h2>
-            <p>Паттерны проектирования — это проверенные методики решения распространённых проблем в проектировании программ. Их можно рассматривать как готовые рецепты для решения типичных задач в разработке программного обеспечения.</p>
-            <p>В данной лабораторной работе рассмотрим три категории паттернов проектирования и их реализацию в PHP:</p>
-            <ul>
-                <li><strong>Порождающие паттерны</strong> — отвечают за удобное и безопасное создание новых объектов</li>
-                <li><strong>Структурные паттерны</strong> — отвечают за композицию объектов и классов</li>
-                <li><strong>Поведенческие паттерны</strong> — определяют коммуникации между объектами</li>
-            </ul>
-            
-            <div class="demo-nav">
-                <a href="?demo=all" class="btn btn-primary">Продемонстрировать все паттерны</a>
-                <a href="index.php" class="btn">Вернуться на главную</a>
+    <header>
+        <a href="index.php" class="back-link">← Вернуться на главную</a>
+        <h1>Лабораторная работа №2</h1>
+        <div class="subtitle">Паттерны проектирования</div>
+    </header>
+
+    <h2 class="section-title">Порождающие паттерны</h2>
+    <div class="pattern-container">
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Фабричный метод (Factory Method)
             </div>
-        </div>
-        
-        <?php if (!empty($demoResults)): ?>
-        <div class="result-block">
-            <h3>Результаты демонстрации паттернов</h3>
-            <?php foreach ($demoResults as $result): ?>
-                <div class="result-item"><?php echo $result; ?></div>
-            <?php endforeach; ?>
-        </div>
-        <?php endif; ?>
-        
-        <?php foreach ($patterns as $type => $category): ?>
-        <div class="pattern-group">
-            <h2><?php echo $category['title']; ?></h2>
-            <p><?php echo $category['description']; ?></p>
-            
-            <?php foreach ($category['patterns'] as $pattern): ?>
-            <div class="pattern-card">
-                <div class="pattern-header">
-                    <h3 class="pattern-title"><?php echo $pattern['name']; ?></h3>
-                    <div class="pattern-actions">
-                        <a href="#" class="btn btn-info show-code" data-file="<?php echo $type . '/' . $pattern['example']; ?>">Показать код</a>
-                        <a href="?demo=<?php echo strtolower(preg_replace('/^demonstrate/', '', $pattern['demo'])); ?>" class="btn btn-primary">Демонстрация</a>
-                    </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Фабричный метод определяет интерфейс для создания объекта, но позволяет подклассам решать, какой класс инстанцировать.</p>
+                    <p>Фабричный метод позволяет классу делегировать создание экземпляров подклассам.</p>
                 </div>
-                <p><?php echo $pattern['description']; ?></p>
-                <div class="code-block" style="display: none;" id="code-<?php echo strtolower(explode(' ', $pattern['name'])[0]); ?>">
-                    <pre><code class="language-php"><?php echo getSourceCode($type . '/' . $pattern['example']); ?></code></pre>
+                <div class="pattern-links">
+                    <a href="lab2/FactoryMethod/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/FactoryMethod/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
                 </div>
             </div>
-            <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Абстрактная фабрика (Abstract Factory)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Абстрактная фабрика предоставляет интерфейс для создания семейств взаимосвязанных или взаимозависимых объектов, не указывая их конкретных классов.</p>
+                    <p>Позволяет создавать объекты, следуя общему интерфейсу.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/AbstractFactory/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/AbstractFactory/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Строитель (Builder)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Строитель отделяет конструирование сложного объекта от его представления так, что в результате одного и того же процесса конструирования могут получаться разные представления.</p>
+                    <p>Позволяет создавать сложные объекты шаг за шагом.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Builder/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Builder/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Прототип (Prototype)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Прототип позволяет копировать объекты, не вдаваясь в подробности их реализации.</p>
+                    <p>Используется для создания дубликата существующего объекта вместо создания нового экземпляра.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Prototype/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Prototype/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Одиночка (Singleton)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Одиночка гарантирует, что у класса есть только один экземпляр, и предоставляет к нему глобальную точку доступа.</p>
+                    <p>Обеспечивает контроль доступа к единственному экземпляру класса.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Singleton/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Singleton/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <script>
-        // Подсветка синтаксиса
-        document.addEventListener('DOMContentLoaded', function() {
-            hljs.highlightAll();
-            
-            // Обработчики для кнопок "Показать код"
-            document.querySelectorAll('.show-code').forEach(function(button) {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const fileData = this.dataset.file.split('/');
-                    const patternName = fileData[1].split('.')[0].toLowerCase();
-                    const codeBlock = document.getElementById('code-' + patternName.toLowerCase());
-                    
-                    if (codeBlock.style.display === 'none') {
-                        codeBlock.style.display = 'block';
-                        this.textContent = 'Скрыть код';
-                    } else {
-                        codeBlock.style.display = 'none';
-                        this.textContent = 'Показать код';
-                    }
-                });
-            });
-        });
-    </script>
+
+    <h2 class="section-title">Структурные паттерны</h2>
+    <div class="pattern-container">
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Адаптер (Adapter)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Адаптер позволяет объектам с несовместимыми интерфейсами работать вместе.</p>
+                    <p>Преобразует интерфейс одного класса в интерфейс другого, который ожидают клиенты.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Adapter/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Adapter/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Мост (Bridge)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Мост отделяет абстракцию от её реализации, что позволяет изменять их независимо друг от друга.</p>
+                    <p>Разделяет один или несколько классов на две отдельные иерархии: абстракцию и реализацию.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Bridge/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Bridge/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Компоновщик (Composite)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Компоновщик объединяет объекты в древовидную структуру для представления иерархии от частного к целому.</p>
+                    <p>Позволяет клиентам одинаково обращаться как к отдельным объектам, так и к группам объектов.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Composite/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Composite/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Декоратор (Decorator)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Декоратор динамически добавляет объекту новые обязанности, представляя гибкую альтернативу наследованию.</p>
+                    <p>Позволяет добавлять новые функциональные возможности объектам, не изменяя их структуру.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Decorator/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Decorator/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Фасад (Facade)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Фасад предоставляет унифицированный интерфейс к набору интерфейсов в подсистеме.</p>
+                    <p>Определяет интерфейс более высокого уровня, который упрощает использование подсистемы.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Facade/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Facade/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Легковес (Flyweight)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Легковес использует разделение для эффективной поддержки множества мелких объектов.</p>
+                    <p>Позволяет вместить большее количество объектов в отведённую оперативную память, разделяя общее состояние объектов.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Flyweight/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Flyweight/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Заместитель (Proxy)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Заместитель предоставляет суррогат или заместитель другого объекта для контроля доступа к нему.</p>
+                    <p>Представляет объект, который выступает в роли интерфейса к другому объекту.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Proxy/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Proxy/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title">Поведенческие паттерны</h2>
+    <div class="pattern-container">
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Цепочка обязанностей (Chain of Responsibility)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Цепочка обязанностей избегает связывания отправителя запроса с его получателем, позволяя более чем одному объекту обработать запрос.</p>
+                    <p>Связывает объекты-получатели в цепочку и передает запрос по цепочке, пока его не обработает какой-либо объект.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/ChainOfResponsibility/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/ChainOfResponsibility/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Команда (Command)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Команда инкапсулирует запрос как объект, позволяя параметризовать клиентов разными запросами, ставить запросы в очередь и поддерживать отмену операций.</p>
+                    <p>Превращает запрос в отдельный объект, содержащий всю информацию о запросе.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Command/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Command/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Итератор (Iterator)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Итератор предоставляет способ последовательного доступа к элементам составного объекта, не раскрывая его внутреннего представления.</p>
+                    <p>Позволяет перебирать элементы коллекции без раскрытия ее реализации.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Iterator/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Iterator/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Посредник (Mediator)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Посредник определяет объект, инкапсулирующий способ взаимодействия множества объектов.</p>
+                    <p>Обеспечивает слабую связанность системы, избавляя объекты от необходимости ссылаться друг на друга.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Mediator/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Mediator/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Снимок (Memento)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Снимок фиксирует и инкапсулирует внутреннее состояние объекта, чтобы объект можно было восстановить в этом состоянии позже.</p>
+                    <p>Позволяет сохранять и восстанавливать прежнее состояние объекта без нарушения инкапсуляции.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Memento/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Memento/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Наблюдатель (Observer)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Наблюдатель определяет зависимость "один-ко-многим" между объектами так, что при изменении состояния одного объекта все зависящие от него объекты уведомляются и автоматически обновляются.</p>
+                    <p>Позволяет объектам оповещать другие объекты об изменениях своего состояния.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Observer/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Observer/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Состояние (State)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Состояние позволяет объекту изменять свое поведение при изменении его внутреннего состояния.</p>
+                    <p>Объект будет выглядеть так, как будто он изменил свой класс.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/State/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/State/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Стратегия (Strategy)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Стратегия определяет семейство алгоритмов, инкапсулирует каждый из них и делает их взаимозаменяемыми.</p>
+                    <p>Позволяет клиенту выбирать подходящий алгоритм из семейства алгоритмов.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Strategy/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Strategy/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Шаблонный метод (Template Method)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Шаблонный метод определяет скелет алгоритма в методе, откладывая определение некоторых шагов на подклассы.</p>
+                    <p>Позволяет подклассам переопределять шаги алгоритма, не изменяя его структуру.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/TemplateMethod/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/TemplateMethod/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-header">
+                Посетитель (Visitor)
+            </div>
+            <div class="pattern-content">
+                <div class="pattern-description">
+                    <p>Паттерн Посетитель представляет операцию, которая выполняется над элементами объектной структуры.</p>
+                    <p>Позволяет определить новую операцию без изменения классов элементов, над которыми она работает.</p>
+                </div>
+                <div class="pattern-links">
+                    <a href="lab2/Visitor/RealWorld/index.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
+                    <a href="lab2/Visitor/Conceptual/index.php" class="pattern-link" target="_blank">Концептуальный пример</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>PHP Student Project &copy; <?php echo date('Y'); ?>. Все права защищены.</p>
+    </div>
 </body>
-</html> 
+</html>
