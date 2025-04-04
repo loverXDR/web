@@ -50,7 +50,7 @@ class Abstraction
 
     public function operation(): string
     {
-        return "Abstraction: Base operation with:\n" .
+        return "Абстракция: Базовая операция с:\n" .
             $this->implementation->operationImplementation();
     }
 }
@@ -65,7 +65,7 @@ class ExtendedAbstraction extends Abstraction
 {
     public function operation(): string
     {
-        return "ExtendedAbstraction: Extended operation with:\n" .
+        return "РасширеннаяАбстракция: Расширенная операция с:\n" .
             $this->implementation->operationImplementation();
     }
 }
@@ -99,7 +99,7 @@ class ConcreteImplementationA implements Implementation
 {
     public function operationImplementation(): string
     {
-        return "ConcreteImplementationA: Here's the result on the platform A.\n";
+        return "КонкретнаяРеализацияA: Вот результат на платформе A.\n";
     }
 }
 
@@ -107,7 +107,7 @@ class ConcreteImplementationB implements Implementation
 {
     public function operationImplementation(): string
     {
-        return "ConcreteImplementationB: Here's the result on the platform B.\n";
+        return "КонкретнаяРеализацияB: Вот результат на платформе B.\n";
     }
 }
 

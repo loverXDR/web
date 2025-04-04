@@ -38,7 +38,7 @@ class Originator
     public function __construct(string $state)
     {
         $this->state = $state;
-        echo "Originator: My initial state is: {$this->state}\n";
+        echo "Создатель: Мое начальное состояние: {$this->state}\n";
     }
 
     /**
@@ -52,9 +52,9 @@ class Originator
      */
     public function doSomething(): void
     {
-        echo "Originator: I'm doing something important.\n";
+        echo "Создатель: Я делаю что-то важное.\n";
         $this->state = $this->generateRandomString(30);
-        echo "Originator: and my state has changed to: {$this->state}\n";
+        echo "Создатель: и моё состояние изменилось на: {$this->state}\n";
     }
 
     private function generateRandomString(int $length = 10): string
@@ -89,7 +89,7 @@ class Originator
     public function restore(Memento $memento): void
     {
         $this->state = $memento->getState();
-        echo "Originator: My state has changed to: {$this->state}\n";
+        echo "Создатель: Моё состояние изменилось на: {$this->state}\n";
     }
 }
 
@@ -183,7 +183,7 @@ class Caretaker
 
     public function backup(): void
     {
-        echo "\nCaretaker: Saving Originator's state...\n";
+        echo "\nОпекун: Сохранение состояния Создателя...\n";
         $this->mementos[] = $this->originator->save();
     }
 
@@ -194,7 +194,7 @@ class Caretaker
         }
         $memento = array_pop($this->mementos);
 
-        echo "Caretaker: Restoring state to: " . $memento->getName() . "\n";
+        echo "Опекун: Восстановление состояния до: " . $memento->getName() . "\n";
         try {
             $this->originator->restore($memento);
         } catch (\Exception $e) {
@@ -204,7 +204,7 @@ class Caretaker
 
     public function showHistory(): void
     {
-        echo "Caretaker: Here's the list of mementos:\n";
+        echo "Опекун: Вот список снимков:\n";
         foreach ($this->mementos as $memento) {
             echo $memento->getName() . "\n";
         }
@@ -216,7 +216,7 @@ class Caretaker
  *
  * RU: Клиентский код.
  */
-$originator = new Originator("Super-duper-super-puper-super.");
+$originator = new Originator("Супер-пупер-супер.");
 $caretaker = new Caretaker($originator);
 
 $caretaker->backup();
@@ -231,8 +231,8 @@ $originator->doSomething();
 echo "\n";
 $caretaker->showHistory();
 
-echo "\nClient: Now, let's rollback!\n\n";
+echo "\nКлиент: Теперь давайте откатимся!\n\n";
 $caretaker->undo();
 
-echo "\nClient: Once more!\n\n";
+echo "\nКлиент: Еще раз!\n\n";
 $caretaker->undo();

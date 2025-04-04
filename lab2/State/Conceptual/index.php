@@ -44,7 +44,7 @@ class Context
      */
     public function transitionTo(State $state): void
     {
-        echo "Context: Transition to " . get_class($state) . ".\n";
+        echo "Контекст: Переход в " . get_class($state) . ".\n";
         $this->state = $state;
         $this->state->setContext($this);
     }
@@ -106,14 +106,14 @@ class ConcreteStateA extends State
 {
     public function handle1(): void
     {
-        echo "ConcreteStateA handles request1.\n";
-        echo "ConcreteStateA wants to change the state of the context.\n";
+        echo "КонкретноеСостояниеA обрабатывает запрос1.\n";
+        echo "КонкретноеСостояниеA хочет изменить состояние контекста.\n";
         $this->context->transitionTo(new ConcreteStateB());
     }
 
     public function handle2(): void
     {
-        echo "ConcreteStateA handles request2.\n";
+        echo "КонкретноеСостояниеA обрабатывает запрос2.\n";
     }
 }
 
@@ -121,13 +121,13 @@ class ConcreteStateB extends State
 {
     public function handle1(): void
     {
-        echo "ConcreteStateB handles request1.\n";
+        echo "КонкретноеСостояниеB обрабатывает запрос1.\n";
     }
 
     public function handle2(): void
     {
-        echo "ConcreteStateB handles request2.\n";
-        echo "ConcreteStateB wants to change the state of the context.\n";
+        echo "КонкретноеСостояниеB обрабатывает запрос2.\n";
+        echo "КонкретноеСостояниеB хочет изменить состояние контекста.\n";
         $this->context->transitionTo(new ConcreteStateA());
     }
 }

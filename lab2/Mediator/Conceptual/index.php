@@ -53,12 +53,12 @@ class ConcreteMediator implements Mediator
     public function notify(object $sender, string $event): void
     {
         if ($event == "A") {
-            echo "Mediator reacts on A and triggers following operations:\n";
+            echo "Посредник реагирует на A и запускает следующие операции:\n";
             $this->component2->doC();
         }
 
         if ($event == "D") {
-            echo "Mediator reacts on D and triggers following operations:\n";
+            echo "Посредник реагирует на D и запускает следующие операции:\n";
             $this->component1->doB();
             $this->component2->doC();
         }
@@ -99,13 +99,13 @@ class Component1 extends BaseComponent
 {
     public function doA(): void
     {
-        echo "Component 1 does A.\n";
+        echo "Компонент 1 выполняет A.\n";
         $this->mediator->notify($this, "A");
     }
 
     public function doB(): void
     {
-        echo "Component 1 does B.\n";
+        echo "Компонент 1 выполняет B.\n";
         $this->mediator->notify($this, "B");
     }
 }
@@ -114,13 +114,13 @@ class Component2 extends BaseComponent
 {
     public function doC(): void
     {
-        echo "Component 2 does C.\n";
+        echo "Компонент 2 выполняет C.\n";
         $this->mediator->notify($this, "C");
     }
 
     public function doD(): void
     {
-        echo "Component 2 does D.\n";
+        echo "Компонент 2 выполняет D.\n";
         $this->mediator->notify($this, "D");
     }
 }
@@ -134,9 +134,9 @@ $c1 = new Component1();
 $c2 = new Component2();
 $mediator = new ConcreteMediator($c1, $c2);
 
-echo "Client triggers operation A.\n";
+echo "Клиент запускает операцию A.\n";
 $c1->doA();
 
 echo "\n";
-echo "Client triggers operation D.\n";
+echo "Клиент запускает операцию D.\n";
 $c2->doD();

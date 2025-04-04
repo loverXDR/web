@@ -123,14 +123,14 @@ class Subject implements \SplSubject
      */
     public function attach(\SplObserver $observer): void
     {
-        echo "Subject: Attached an observer.\n";
+        echo "Издатель: Прикреплен наблюдатель.\n";
         $this->observers->attach($observer);
     }
 
     public function detach(\SplObserver $observer): void
     {
         $this->observers->detach($observer);
-        echo "Subject: Detached an observer.\n";
+        echo "Издатель: Отсоединен наблюдатель.\n";
     }
 
     /**
@@ -140,7 +140,7 @@ class Subject implements \SplSubject
      */
     public function notify(): void
     {
-        echo "Subject: Notifying observers...\n";
+        echo "Издатель: Уведомление наблюдателей...\n";
         foreach ($this->observers as $observer) {
             $observer->update($this);
         }
@@ -159,10 +159,10 @@ class Subject implements \SplSubject
      */
     public function someBusinessLogic(): void
     {
-        echo "\nSubject: I'm doing something important.\n";
+        echo "\nИздатель: Я делаю что-то важное.\n";
         $this->state = rand(0, 10);
 
-        echo "Subject: My state has just changed to: {$this->state}\n";
+        echo "Издатель: Моё состояние изменилось на: {$this->state}\n";
         $this->notify();
     }
 }
@@ -179,7 +179,7 @@ class ConcreteObserverA implements \SplObserver
     public function update(\SplSubject $subject): void
     {
         if ($subject->state < 3) {
-            echo "ConcreteObserverA: Reacted to the event.\n";
+            echo "КонкретныйНаблюдательA: Отреагировал на событие.\n";
         }
     }
 }
@@ -189,7 +189,7 @@ class ConcreteObserverB implements \SplObserver
     public function update(\SplSubject $subject): void
     {
         if ($subject->state == 0 || $subject->state >= 2) {
-            echo "ConcreteObserverB: Reacted to the event.\n";
+            echo "КонкретныйНаблюдательB: Отреагировал на событие.\n";
         }
     }
 }
