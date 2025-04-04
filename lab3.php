@@ -150,7 +150,6 @@
                 </div>
                 <div class="pattern-links">
                     <a href="lab3/patterns/singleton/settings_use.php" class="pattern-link" target="_blank">Посмотреть демонстрацию</a>
-                    <a href="lab3/patterns/singleton/Settings.php" class="pattern-link" target="_blank">Исходный код класса Settings</a>
                 </div>
             </div>
         </div>
