@@ -206,12 +206,12 @@ $superUser = new SuperUser("Admin User", "admin", "adminpass", "Administrator");
 
         <div class="lab-card">
             <div class="lab-header">
-                Лабораторная работа №4
+                Лабораторная работа №4 <span class="completed-badge">Выполнено</span>
             </div>
             <div class="lab-content">
                 <div class="lab-description">
-                    <p>Работа с файлами и сессиями. Загрузка и обработка файлов, сохранение состояния между запросами.</p>
-                    <p>Реализация системы хранения пользовательских настроек.</p>
+                    <p>Использование ООП с базой данных SQLite. Разработка новостного веб-приложения с операциями CRUD.</p>
+                    <p>Создание и работа с классами для взаимодействия с базой данных, реализация интерфейса INewsDB.</p>
                 </div>
                 <a href="lab4.php" class="lab-link">Открыть работу</a>
             </div>
@@ -219,12 +219,12 @@ $superUser = new SuperUser("Admin User", "admin", "adminpass", "Administrator");
 
         <div class="lab-card">
             <div class="lab-header">
-                Лабораторная работа №5
+                Лабораторная работа №5 <span class="completed-badge">Выполнено</span>
             </div>
             <div class="lab-content">
                 <div class="lab-description">
-                    <p>Работа с API и асинхронными запросами. Использование AJAX для создания динамических веб-приложений.</p>
-                    <p>Интеграция с внешними сервисами и обработка JSON-данных.</p>
+                    <p>Standard PHP Library (SPL): Итераторы. Реализация классов, реализующих интерфейсы Iterator и IteratorAggregate.</p>
+                    <p>Создание диаграммы классов, работа с базой данных SQLite и динамическое отображение категорий.</p>
                 </div>
                 <a href="lab5.php" class="lab-link">Открыть работу</a>
             </div>
@@ -232,14 +232,14 @@ $superUser = new SuperUser("Admin User", "admin", "adminpass", "Administrator");
 
         <div class="lab-card">
             <div class="lab-header">
-                Лабораторная работа №6
+                Лабораторная работа №6 <span class="completed-badge">Выполнено</span>
             </div>
             <div class="lab-content">
                 <div class="lab-description">
-                    <p>Разработка REST API. Создание и документирование API для взаимодействия с внешними системами.</p>
-                    <p>Реализация механизмов аутентификации и авторизации.</p>
+                    <p>Использование MVC фреймворка. Реализация контроллеров, действий и представлений в архитектуре MVC.</p>
+                    <p>Работа с маршрутизацией и обработка параметров запросов.</p>
                 </div>
-                <a href="lab6.php" class="lab-link">Открыть работу</a>
+                <a href="http://loverxdrya.temp.swtest.ru/hello/" class="lab-link" target="_blank">Открыть работу</a>
             </div>
         </div>
     </div>

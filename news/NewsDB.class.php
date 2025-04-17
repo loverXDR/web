@@ -6,13 +6,16 @@ require_once "INewsDB.class.php";
  * Реализует интерфейс INewsDB для работы с новостной лентой
  * Хранит новости в базе данных SQLite
  */
-class NewsDB implements INewsDB {
+class NewsDB implements INewsDB, IteratorAggregate {
     
     // Константа с именем базы данных
     const DB_NAME = __DIR__ . '/news.db';
     
     // Закрытое свойство для хранения экземпляра класса SQLite3
     private $_db;
+    
+    // Added private property for categories
+    private array $items = [];
     
     /**
      * Геттер для свойства $_db
@@ -66,6 +69,8 @@ class NewsDB implements INewsDB {
             $this->_db->exec($createCategoryTable);
             $this->_db->exec($fillCategoryTable);
         }
+        // Call getCategories after establishing DB connection
+        $this->getCategories();
     }
     
     /**
@@ -154,6 +159,41 @@ class NewsDB implements INewsDB {
         
         // Возвращаем результат операции
         return $result !== false;
+    }
+
+    /**
+     * Fetches categories from the database and populates the items array.
+     */
+    private function getCategories(): void {
+        try {
+            $sql = "SELECT id, name FROM category";
+            $result = $this->_db->query($sql);
+
+            if (!$result) {
+                throw new Exception($this->_db->lastErrorMsg());
+            }
+
+            $this->items = []; // Clear previous items
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                $this->items[$row['id']] = $row['name'];
+            }
+        } catch (Exception $e) {
+            // Log error or handle it appropriately
+            error_log("Error fetching categories: " . $e->getMessage());
+            // Optionally rethrow or return a specific state
+        }
+    }
+
+    /**
+     * Returns an iterator for the categories.
+     *
+     * Required by IteratorAggregate interface.
+     *
+     * @return ArrayIterator
+     */
+    public function getIterator(): \ArrayIterator
+    {
+        return new \ArrayIterator($this->items);
     }
 }
 ?>

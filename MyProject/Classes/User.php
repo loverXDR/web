@@ -62,7 +62,11 @@ class User extends AbstractUser
      */
     public function __destruct()
     {
-        echo "Пользователь {$this->login} удален.<br>";
+        // Выводим сообщение только если определена константа SHOW_DESTRUCT
+        // Эта константа будет определена в lab1.php, но не в index.php
+        if (defined('SHOW_DESTRUCT') && SHOW_DESTRUCT) {
+            echo "Пользователь {$this->login} удален.<br>";
+        }
     }
 
     /**

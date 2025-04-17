@@ -1,0 +1,85 @@
+@startuml Iterator Pattern
+
+' Style options
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor PaleGreen
+    ArrowColor SeaGreen
+    BorderColor SpringGreen
+}
+skinparam interface {
+    BackgroundColor LightSkyBlue
+    ArrowColor SteelBlue
+    BorderColor DeepSkyBlue
+}
+hide empty members
+
+' Header
+title Iterator Pattern in PHP
+
+' Task 1: Iterator Interface Implementation
+package "Task 1 - NumbersSquared" {
+    interface Iterator {
+        + rewind(): void
+        + valid(): bool
+        + next(): void
+        + key(): mixed
+        + current(): mixed
+    }
+
+    class NumbersSquared {
+        - start: int
+        - end: int
+        - current: int
+        + __construct(start: int, end: int)
+        + rewind(): void
+        + valid(): bool
+        + next(): void
+        + key(): int
+        + current(): int
+    }
+
+    NumbersSquared ..|> Iterator
+}
+
+' Task 2: IteratorAggregate Implementation
+package "Task 2 - NewsDB" {
+    interface IteratorAggregate {
+        + getIterator(): Traversable
+    }
+
+    class ArrayIterator {
+        + __construct(array $array)
+        + current(): mixed
+        + key(): mixed
+        + next(): void
+        + rewind(): void
+        + valid(): bool
+    }
+
+    class "NewsDB" {
+        - items: array
+        - _db: SQLite3
+        + __construct()
+        - getCategories(): void
+        + getIterator(): ArrayIterator
+        + saveNews(title, category, description, source): bool
+        + getNews(): array
+        + deleteNews(id): bool
+    }
+
+    NewsDB ..|> IteratorAggregate
+    IteratorAggregate ..> "returns" ArrayIterator
+}
+
+note bottom of NewsDB
+  The NewsDB class fetches categories from the database
+  and provides them via an ArrayIterator.
+end note
+
+note bottom of NumbersSquared
+  The NumbersSquared class iterates over a range of numbers 
+  and returns their squared values.
+end note
+
+@enduml 

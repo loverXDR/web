@@ -76,6 +76,7 @@ class SuperUser extends User implements SuperUserInterface
      */
     public function __destruct()
     {
+        // Вызываем родительский деструктор (теперь без вывода сообщения)
         parent::__destruct();
         self::$superUserCount--;
     }

@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+// Показывать сообщения деструктора
+define('SHOW_DESTRUCT', true);
+
 // Функция автозагрузки
 spl_autoload_register(function ($class) {
     $prefix = 'MyProject\\';

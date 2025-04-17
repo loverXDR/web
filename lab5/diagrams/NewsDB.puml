@@ -1,0 +1,44 @@
+@startuml NewsDB
+
+' Style options
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor PaleGreen
+    ArrowColor SeaGreen
+    BorderColor SpringGreen
+}
+skinparam interface {
+    BackgroundColor LightSkyBlue
+    ArrowColor SteelBlue
+    BorderColor DeepSkyBlue
+}
+hide empty members
+
+interface IteratorAggregate {
+  + getIterator(): Traversable
+}
+
+class ArrayIterator {
+  + __construct(array $array)
+  + current(): mixed
+  + key(): mixed
+  + next(): void
+  + rewind(): void
+  + valid(): bool
+}
+
+class "NewsDB" {
+  - items: array
+  - _db: SQLite3
+  + __construct()
+  - getCategories(): void
+  + getIterator(): ArrayIterator
+  + saveNews(title, category, description, source): bool
+  + getNews(): array
+  + deleteNews(id): bool
+}
+
+NewsDB ..|> IteratorAggregate
+IteratorAggregate ..> "returns" ArrayIterator
+
+@enduml 
